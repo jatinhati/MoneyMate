@@ -6,6 +6,7 @@ import org.example.MoneyManager.entity.ProfileEntity;
 import org.example.MoneyManager.repositories.ProfileRepository;
 import org.example.MoneyManager.dto.ProfileDTO;
 import org.example.MoneyManager.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,11 +29,14 @@ public class ProfileService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    @Value("${app.activation.url}")
+    private String activationUrl;
+
     public ProfileDTO registerProfile(ProfileDTO profileDto){
         ProfileEntity newProfile = toEntity(profileDto);
         newProfile.setActivationToken(UUID.randomUUID().toString());
         newProfile = profileRepository.save(newProfile);
-        String activationLink = "http://localhost:8080/api/v1.0/activate?token=" + newProfile.getActivationToken();
+        String activationLink = activationUrl+"/api/v1.0/activate?token=" + newProfile.getActivationToken();
         String subject = "Activate your account";
         String body = "Dear " + newProfile.getFullName() + ",\n\n" +
                 "Thank you for registering. Please click the following link to activate your account:\n" +
