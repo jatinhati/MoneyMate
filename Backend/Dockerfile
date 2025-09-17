@@ -12,7 +12,7 @@ COPY Backend/target/*.jar app.jar
 
 
 # Expose the port (Render maps it automatically)
-EXPOSE 8080
+EXPOSE 7777
 
 # Run the application
 ENTRYPOINT ["java", "-Xmx512m", "-Xms256m", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
