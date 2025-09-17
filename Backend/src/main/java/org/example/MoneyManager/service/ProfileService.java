@@ -1,7 +1,6 @@
 package org.example.MoneyManager.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.MoneyManager.dto.AuthDTO;
 import org.example.MoneyManager.entity.ProfileEntity;
 import org.example.MoneyManager.repositories.ProfileRepository;
@@ -15,13 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.UUID;
 
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
@@ -35,47 +32,18 @@ public class ProfileService {
     @Value("${app.activation.url}")
     private String activationUrl;
 
-    @Transactional
-    public ProfileDTO registerProfile(ProfileDTO profileDto) {
-        // Check if email already exists
-        if (profileRepository.existsByEmail(profileDto.getEmail())) {
-            throw new RuntimeException("Email already registered");
-        }
-
-        // Create and save the profile
+    public ProfileDTO registerProfile(ProfileDTO profileDto){
         ProfileEntity newProfile = toEntity(profileDto);
         newProfile.setActivationToken(UUID.randomUUID().toString());
-        newProfile.setIsActive(false); // Set to false until email is verified
         newProfile = profileRepository.save(newProfile);
-
-        // Prepare activation email
-        String activationLink = activationUrl + "/api/v1.0/activate?token=" + newProfile.getActivationToken();
-        String subject = "Activate your MoneyManager account";
-        String body = String.format("""
-            Dear %s,
-
-            Thank you for registering with MoneyManager. To complete your registration, 
-            please click the following link to activate your account:
-
-            %s
-
-            This link will expire in 24 hours.
-
-            If you did not create an account, please ignore this email.
-
-            Best regards,
-            MoneyManager Team
-            """, newProfile.getFullName(), activationLink);
-
-        // Send activation email asynchronously
-        try {
-            emailService.sendEmail(newProfile.getEmail(), subject, body);
-        } catch (Exception e) {
-            // Log the error but don't fail the registration
-            // The user can request a new activation email if needed
-            log.error("Failed to send activation email to: {}", newProfile.getEmail(), e);
-        }
-
+        String activationLink = activationUrl+"/api/v1.0/activate?token=" + newProfile.getActivationToken();
+        String subject = "Activate your account";
+        String body = "Dear " + newProfile.getFullName() + ",\n\n" +
+                "Thank you for registering. Please click the following link to activate your account:\n" +
+                activationLink + "\n\n" +
+                "Best regards,\n" +
+                "MoneyManager Team";
+        emailService.sendEmail(newProfile.getEmail(),subject,body);
         return toDto(newProfile);
     }
 
