@@ -1,21 +1,30 @@
-# Use Maven builder image
+# Build stage
 FROM maven:3.9-eclipse-temurin-21 AS build
-WORKDIR /app
-# Copy only the POM file first for better layer caching
-COPY Backend/pom.xml .
-# Download dependencies
-RUN mvn dependency:go-offline -B
-# Copy source code
-COPY Backend/src/ ./src/
+WORKDIR /workspace/app
+
+# Copy build files
+COPY pom.xml .
+COPY src/ src/
+
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Use JRE image for final image
-FROM eclipse-temurin:21-jre
+# Production stage
+FROM eclipse-temurin:21-jre-jammy
+
 WORKDIR /app
-# Copy the JAR file from the build stage
-COPY --from=build /app/target/MoneyMate-0.0.1-SNAPSHOT.jar app.jar
+
+# Copy the JAR from the build stage
+COPY --from=build /workspace/app/target/*.jar app.jar
+
+# Set the timezone
+ENV TZ=Asia/Kolkata
+
+# Set JVM options for production
+ENV JAVA_OPTS="-Xmx512m -Xms256m -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=prod"
+
 # Expose the port the app runs on
 EXPOSE 8080
+
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
