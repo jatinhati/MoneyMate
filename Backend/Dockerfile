@@ -5,11 +5,11 @@ FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 # Copy JAR (assumes you already ran `mvn clean package -DskipTests` locally or in CI)
-<<<<<<< HEAD
+
 COPY Backend/target/MoneyMate-0.0.1-SNAPSHOT.jar app.jar
-=======
+
 COPY Backend/target/*.jar app.jar
->>>>>>> f4e2f1624e499851ff5347651ccbb8fbb23ebfb0
+
 
 # Expose the port (Render maps it automatically)
 EXPOSE 8080
