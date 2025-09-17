@@ -1,4 +1,4 @@
-package org.example.moneymaanager.controller;
+package org.example.MoneyManager.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
