@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 public class EmailService {
     private final JavaMailSender mailSender;
+    private final BrevoEmailClient brevoEmailClient;
 
     @Value("${spring.mail.properties.mail.smtp.from}")
     private String fromEmail;
@@ -29,7 +30,12 @@ public class EmailService {
             message.setText(body);
             mailSender.send(message);
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            // Fallback to Brevo HTTP API if SMTP is blocked
+            try {
+                brevoEmailClient.sendTransactionalEmail(to, subject, body);
+            } catch (Exception apiEx) {
+                throw new RuntimeException(apiEx.getMessage());
+            }
         }
     }
 }
