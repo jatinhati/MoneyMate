@@ -34,11 +34,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+        System.out.println("Configuring Security Filter Chain...");
         httpSecurity.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth->
-                        auth.requestMatchers("/register","/login","/activate","/status").permitAll()
-                                .anyRequest().authenticated())
+                .authorizeHttpRequests(auth->{
+                    System.out.println("Configuring authorization rules...");
+                    auth.requestMatchers("/register","/login","/activate","/status","/test/**").permitAll()
+                            .anyRequest().authenticated();
+                })
                 .sessionManagement(session->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

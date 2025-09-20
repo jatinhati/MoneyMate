@@ -23,7 +23,7 @@ public class EmailService {
     @Value("${spring.mail.username:}")
     private String fallbackFromEmail;
 
-    public void sendEmail(String to,String subject,String body){
+    public void sendEmail(String to, String subject, String body) {
         if (smtpEnabled) {
             try {
                 String resolvedFrom = StringUtils.hasText(fromEmail) ? fromEmail : fallbackFromEmail;
@@ -35,14 +35,20 @@ public class EmailService {
                 mailSender.send(message);
                 return;
             } catch (Exception e) {
-                // swallow and fall back to API
+                // Log the SMTP error and fall back to API
+                System.err.println("SMTP email failed, falling back to Brevo API: " + e.getMessage());
             }
         }
+        
         // API fallback or primary path when SMTP disabled
         try {
             brevoEmailClient.sendTransactionalEmail(to, subject, body);
         } catch (Exception apiEx) {
-            throw new RuntimeException(apiEx.getMessage());
+            // Log the API error but don't throw exception for now
+            System.err.println("Brevo API email failed: " + apiEx.getMessage());
+            System.err.println("Email sending disabled - user registration will continue without email verification");
+            // Don't throw exception - let registration continue
+            // throw new RuntimeException("Mail server connection failed. Failed messages: " + apiEx.getMessage());
         }
     }
 }

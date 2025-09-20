@@ -33,10 +33,14 @@ public class BrevoEmailClient {
             brevoApiKey = brevoApiKey.trim();
         }
         if (brevoApiKey == null || brevoApiKey.isBlank()) {
-            throw new IllegalStateException("Brevo API key not configured");
+            throw new IllegalStateException("Brevo API key not configured. Please set BREVO_API_KEY environment variable.");
         }
         if (!brevoApiKey.startsWith("xkeysib-")) {
-            throw new IllegalStateException("Brevo API key appears invalid (expected to start with xkeysib-)");
+            throw new IllegalStateException("Brevo API key appears invalid (expected to start with xkeysib-). Current key: " + 
+                (brevoApiKey.length() > 10 ? brevoApiKey.substring(0, 10) + "..." : brevoApiKey));
+        }
+        if (defaultSender == null || defaultSender.isBlank()) {
+            throw new IllegalStateException("Brevo sender email not configured. Please set BREVO_MAIL environment variable.");
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
