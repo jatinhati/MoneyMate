@@ -12,4 +12,4 @@ public class MoneyManagerApplication {
         SpringApplication.run(MoneyManagerApplication.class, args);
     }
 
-}
+}   
