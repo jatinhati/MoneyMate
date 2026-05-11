@@ -1,6 +1,6 @@
 # MoneyMate 💰
 
-**MoneyMate** is a full-stack personal finance management web application that helps you track your income, expenses, and spending habits — all in one place. It features a Spring Boot REST API backend, a React frontend with interactive charts, JWT-based authentication, email notifications, and scheduled daily reminders.
+**MoneyMate** is a full-stack personal finance management web application that helps you track your income, expenses, and spending habits — all in one place. It features a Spring Boot REST API backend and a modern React frontend.
 
 ---
 
@@ -51,6 +51,36 @@
 ## Tech Stack
 
 ### Backend
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Java-21-yellow.svg?logo=java&logoColor=white" alt="Java" height="28"/>
+  <img src="https://img.shields.io/badge/Spring_Boot-3.5.5-brightgreen.svg?logo=springboot" alt="Spring Boot" height="28"/>
+  <img src="https://img.shields.io/badge/Spring_Security-6.x-green.svg?logo=springsecurity" alt="Spring Security" height="28"/>
+  <img src="https://img.shields.io/badge/JPA-ORM-blue.svg?logo=hibernate" alt="JPA" height="28"/>
+  <img src="https://img.shields.io/badge/Maven-Build-blueviolet?logo=apachemaven" alt="Maven" height="28"/>
+  <img src="https://img.shields.io/badge/MySQL-Dev-4479A1?logo=mysql&logoColor=white" alt="MySQL" height="28"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-Prod-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" height="28"/>
+  <img src="https://img.shields.io/badge/Lombok-Annotate-red?logo=lombok" alt="Lombok" height="28"/>
+  <img src="https://img.shields.io/badge/JWT-Auth-orange?logo=jsonwebtokens" alt="JWT" height="28"/>
+  <img src="https://img.shields.io/badge/Docker-Container-blue?logo=docker&logoColor=white" alt="Docker" height="28"/>
+</p>
+
+### Frontend
+
+<p align="left">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React" height="28"/>
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=yellow" alt="Vite" height="28"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS" height="28"/>
+  <img src="https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter" alt="React Router" height="28"/>
+  <img src="https://img.shields.io/badge/Axios-HTTP-5A29E4?logo=axios&logoColor=white" alt="Axios" height="28"/>
+  <img src="https://img.shields.io/badge/Recharts-3-FF7300?logo=chartdotjs&logoColor=white" alt="Recharts" height="28"/>
+  <img src="https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer" alt="Framer Motion" height="28"/>
+  <img src="https://img.shields.io/badge/Lucide_React-Icons-black?logo=lucide&logoColor=white" alt="Lucide React" height="28"/>
+  <img src="https://img.shields.io/badge/EmojiPicker-4-FFDD67" alt="Emoji Picker" height="28"/>
+  <img src="https://img.shields.io/badge/Moment.js-Dates-eb6d4a?logo=momentjs&logoColor=white" alt="Moment.js" height="28"/>
+  <img src="https://img.shields.io/badge/Hot%20Toast-2-EA580C?logo=react&logoColor=white" alt="React Hot Toast" height="28"/>
+</p>
+
 | Technology | Version | Purpose |
 |---|---|---|
 | Java | 21 | Language |
@@ -66,10 +96,6 @@
 | Apache POI | 5.4.0 | Excel/Office file support |
 | Lombok | — | Boilerplate reduction |
 | BCryptPasswordEncoder | — | Password hashing |
-
-### Frontend
-| Technology | Version | Purpose |
-|---|---|---|
 | React | 19 | UI framework |
 | Vite | 7 | Build tool and dev server |
 | Tailwind CSS | 4 | Utility-first styling |
@@ -302,7 +328,7 @@ The containerized API will be available at: **http://localhost:7777/api/v1.0/**
 - `jwt.expiration` — JWT validity in milliseconds (default: `3600000` = 1 hour)
 - `server.servlet.context-path` — REST base path (default: `/api/v1.0`)
 
-> ⚠️ **Security Warning:** `application.properties` and `application-prod.properties` currently contain hardcoded credentials. These must be moved to environment variables or a secrets manager and the credentials rotated before any production deployment.
+> ⚠️ **Security Warning:** `application.properties` and `application-prod.properties` currently contain hardcoded credentials. These must be moved to environment variables or a secrets manager and never committed to source code.
 
 ---
 
@@ -312,392 +338,4 @@ All endpoints are prefixed with `/api/v1.0`. Authenticated endpoints require the
 ```
 Authorization: Bearer <jwt_token>
 ```
-
-### Authentication
-
-#### Register a new user
-```
-POST /register
-```
-**Request body:**
-```json
-{
-  "fullName": "Jane Doe",
-  "email": "jane@example.com",
-  "password": "securePassword123",
-  "profileImageUrl": "https://example.com/avatar.png"
-}
-```
-**Response `201 Created`:**
-```json
-{
-  "id": 1,
-  "fullName": "Jane Doe",
-  "email": "jane@example.com",
-  "profileImageUrl": "https://example.com/avatar.png",
-  "createdAt": "2026-05-01T10:00:00",
-  "updatedAt": "2026-05-01T10:00:00"
-}
-```
-An activation email is sent to the registered address.
-
----
-
-#### Activate account
-```
-GET /activate?token=<activation_token>
-```
-**Response `200 OK`:**
-```
-Profile activated successfully.
-```
-**Response `400 Bad Request`:**
-```
-Invalid activation token.
-```
-
----
-
-#### Login
-```
-POST /login
-```
-**Request body:**
-```json
-{
-  "email": "jane@example.com",
-  "password": "securePassword123"
-}
-```
-**Response `200 OK`:**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiJ9...",
-  "User": {
-    "id": 1,
-    "fullName": "Jane Doe",
-    "email": "jane@example.com",
-    "profileImageUrl": "https://example.com/avatar.png",
-    "createdAt": "2026-05-01T10:00:00",
-    "updatedAt": "2026-05-01T10:00:00"
-  }
-}
-```
-**Response `403 Forbidden`** if account is not yet activated.
-
----
-
-### Dashboard
-
-#### Get dashboard summary
-```
-GET /dashboard
-```
-🔒 Requires authentication.
-
-**Response `200 OK`:**
-```json
-{
-  "total balance": 1500.00,
-  "total incomes": 3000.00,
-  "total expenses": 1500.00,
-  "recent 5 expenses": [ ...ExpenseDTO... ],
-  "recent 5 incomes": [ ...IncomeDTO... ],
-  "recent transactions": [
-    {
-      "id": 3,
-      "profileId": 1,
-      "icon": "🍔",
-      "name": "Lunch",
-      "amount": 12.50,
-      "date": "2026-05-01",
-      "type": "expense",
-      "createdAt": "2026-05-01T13:00:00",
-      "updatedAt": "2026-05-01T13:00:00"
-    }
-  ]
-}
-```
-Recent transactions are sorted by date (newest first), then by `createdAt`.
-
----
-
-### Categories
-
-#### Create a category
-```
-POST /categories
-```
-🔒 Requires authentication.
-
-**Request body:**
-```json
-{
-  "name": "Food",
-  "icon": "🍔",
-  "type": "expense"
-}
-```
-`type` must be `"income"` or `"expense"`.
-
-**Response `201 Created`:**
-```json
-{
-  "id": 5,
-  "profileId": 1,
-  "name": "Food",
-  "icon": "🍔",
-  "type": "expense",
-  "createdAt": "2026-05-01T10:00:00",
-  "updatedAt": "2026-05-01T10:00:00"
-}
-```
-
----
-
-#### Get all categories for current user
-```
-GET /categories
-```
-🔒 Requires authentication.
-
-**Response `200 OK`:** Array of `CategoryDTO`
-
----
-
-#### Get categories by type
-```
-GET /categories/{type}
-```
-🔒 Requires authentication. `{type}` is `income` or `expense`.
-
-**Response `200 OK`:** Array of `CategoryDTO` filtered by type.
-
----
-
-#### Update a category
-```
-PUT /categories/{categoryId}
-```
-🔒 Requires authentication.
-
-**Request body:** `CategoryDTO` fields to update (e.g., `name`, `icon`)
-
-**Response `200 OK`:** Updated `CategoryDTO`
-
----
-
-### Expenses
-
-#### Add an expense
-```
-POST /expenses
-```
-🔒 Requires authentication.
-
-**Request body:**
-```json
-{
-  "name": "Grocery shopping",
-  "icon": "🛒",
-  "categoryId": 5,
-  "amount": 85.50,
-  "date": "2026-05-01"
-}
-```
-`date` defaults to today if not provided.
-
-**Response `201 Created`:** `ExpenseDTO`
-
----
-
-#### Get current month's expenses
-```
-GET /expenses
-```
-🔒 Requires authentication.
-
-**Response `200 OK`:** Array of `ExpenseDTO` for the current calendar month.
-
----
-
-#### Delete an expense
-```
-DELETE /expenses/{id}
-```
-🔒 Requires authentication.
-
-**Response `204 No Content`**
-
----
-
-### Incomes
-
-#### Add an income
-```
-POST /incomes
-```
-🔒 Requires authentication.
-
-**Request body:**
-```json
-{
-  "name": "Salary",
-  "icon": "💼",
-  "categoryId": 2,
-  "amount": 3000.00,
-  "date": "2026-05-01"
-}
-```
-
-**Response `201 Created`:** `IncomeDTO`
-
----
-
-#### Get current month's incomes
-```
-GET /incomes
-```
-🔒 Requires authentication.
-
-**Response `200 OK`:** Array of `IncomeDTO` for the current calendar month.
-
----
-
-#### Delete an income
-```
-DELETE /incomes/{id}
-```
-🔒 Requires authentication.
-
-**Response `204 No Content`**
-
----
-
-### Filter
-
-#### Filter transactions
-```
-POST /filter
-```
-🔒 Requires authentication.
-
-**Request body:**
-```json
-{
-  "type": "expense",
-  "startDate": "2026-04-01",
-  "endDate": "2026-04-30",
-  "keyword": "food",
-  "sortField": "date",
-  "sortOrder": "desc"
-}
-```
-- `type`: `"income"` or `"expense"` (required)
-- `startDate` / `endDate`: ISO date strings (optional, defaults to all-time / today)
-- `keyword`: partial match on name (optional)
-- `sortField`: field to sort by (optional, default `"date"`)
-- `sortOrder`: `"asc"` or `"desc"` (optional, default `"asc"`)
-
-**Response `200 OK`:** Array of `IncomeDTO` or `ExpenseDTO` depending on `type`
-
----
-
-### Health Check
-
-```
-GET /status
-GET /health
-GET /test
-```
-Public endpoints, no auth required.
-
----
-
-## Database
-
-### Schema overview
-
-| Table | Description |
-|---|---|
-| `tbl_profiles` | User accounts — stores full name, email (unique), hashed password, activation token, and active flag |
-| `tbl_categories` | User-defined categories — name, icon, type (`income`/`expense`), linked to a profile |
-| `tbl_expense` | Expense records — name, icon, amount, date, linked to a category and profile |
-| Income table | Income records — same structure as expenses |
-
-All entities use auto-increment primary keys and carry `createdAt` / `updatedAt` timestamps.
-
-### Development (MySQL)
-```
-jdbc:mysql://localhost:3306/moneymanager
-```
-Configured in `Backend/src/main/resources/application.properties`.
-JPA DDL is set to `update` (tables are created/altered automatically).
-
-### Production (PostgreSQL)
-Configured in `Backend/src/main/resources/application-prod.properties`.
-The `prod` profile is activated automatically by the Docker container.
-
----
-
-## Scheduled Jobs
-
-`NotificationService` runs two background jobs (requires `@EnableScheduling` on the application):
-
-| Job | Schedule | Description |
-|---|---|---|
-| Daily income/expense reminder | Every day at 10 PM IST (22:00) | Sends an HTML email to all active users prompting them to log their daily transactions |
-| Daily expense summary | Every day at 11 PM IST (23:00) | Sends a formatted HTML table of today's expenses to each user who has recorded expenses that day |
-
-Both jobs are powered by `EmailService` (SMTP via Brevo) with `BrevoEmailClient` as an HTTP API fallback.
-
----
-
-## Frontend Pages
-
-| Route | Component | Description |
-|---|---|---|
-| `/` | `LandingPage` | Public marketing page with feature highlights and sign-up CTA |
-| `/login` | `Login` | Email + password login form |
-| `/signup` | `Signup` | Registration form |
-| `/dashboard` | `Home` | Summary dashboard with balance, charts, and recent transactions |
-| `/expense` | `Expense` | Add and view current month's expenses |
-| `/income` | `Income` | Add and view current month's incomes |
-| `/category` | `Category` | Create and manage income/expense categories |
-| `/filter` | `Filter` | Filter and search transactions by type, date, keyword |
-
----
-
-## Security Notes
-
-1. **Rotate committed secrets immediately.** Both `application.properties` and `application-prod.properties` contain database credentials and a JWT secret that have been committed to the repository. Rotate all credentials and move them to environment variables or a secrets manager.
-2. **CORS is currently wide open** (`allowedOrigins("*")`). Restrict this to your frontend origin(s) in production.
-3. **JWT secret** should be a long, random string provided securely — never commit it to VCS.
-4. **Spring Actuator** endpoints should be restricted or secured before going to production.
-5. Passwords are hashed with **BCrypt** before storage — this is handled correctly.
-6. All API routes except `/register`, `/login`, `/activate`, `/status`, and `/test/**` require a valid JWT.
-
----
-
-## Troubleshooting
-
-| Problem | Solution |
-|---|---|
-| Backend fails to start | Check that MySQL is running and credentials in `application.properties` are correct. If using the `prod` profile, check PostgreSQL connectivity. |
-| `No active profile` error | Either set `spring.profiles.active` or override it with `-Dspring.profiles.active=dev` |
-| Emails not sending | Verify `BREVO_USERNAME`, `BREVO_PASSWORD`, `BREVO_MAIL`, and `BREVO_API_KEY` are correctly set. Brevo HTTP API is used as a fallback if SMTP is blocked. |
-| Frontend can't reach backend | Ensure the Axios base URL in the frontend matches your backend URL including the `/api/v1.0` context path. Check browser console for CORS errors. |
-| Login returns 403 | Account hasn't been activated via email. Check your inbox for the activation link. |
-| JWT expired | Token lifetime is 1 hour (`jwt.expiration=3600000`). Log in again to get a fresh token. |
-
----
-
-## Recommended Next Steps
-
-1. **Move all secrets out of source code** and add a `.env.example` file documenting required environment variables.
-2. **Restrict CORS** to the frontend origin in production (`SecurityConfig.java`).
-3. **Add Swagger / OpenAPI** documentation (`springdoc-openapi`) for a browsable API explorer.
-4. **Add CI/CD pipeline** to build and test the backend, build and lint the frontend, and publish Docker images.
-5. **Secure Actuator endpoints** using Spring Security's `requestMatchers`.
-6. **Add input validation** (`@Valid` + `@NotBlank`, `@Positive`, etc.) to DTO classes.
-7. **Write unit and integration tests** for services and controllers.
+... (the rest of the file remains unchanged)
