@@ -1,8 +1,44 @@
 # MoneyMate 💰
 
 **MoneyMate** is a full-stack personal finance management web application that helps you track your income, expenses, and spending habits — all in one place. It features a Spring Boot REST API backend and a modern React frontend.
+---
+
+## Tech Stack
+
+### Backend
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Java-21-yellow.svg?logo=java&logoColor=white" alt="Java" height="28"/>
+  <img src="https://img.shields.io/badge/Spring_Boot-3.5.5-brightgreen.svg?logo=springboot" alt="Spring Boot" height="28"/>
+  <img src="https://img.shields.io/badge/Spring_Security-6.x-green.svg?logo=springsecurity" alt="Spring Security" height="28"/>
+  <img src="https://img.shields.io/badge/JPA-ORM-blue.svg?logo=hibernate" alt="JPA" height="28"/>
+  <img src="https://img.shields.io/badge/Maven-Build-blueviolet?logo=apachemaven" alt="Maven" height="28"/>
+  <img src="https://img.shields.io/badge/MySQL-Dev-4479A1?logo=mysql&logoColor=white" alt="MySQL" height="28"/>
+  <img src="https://img.shields.io/badge/PostgreSQL-Prod-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" height="28"/>
+  <img src="https://img.shields.io/badge/Lombok-Annotate-red?logo=lombok" alt="Lombok" height="28"/>
+  <img src="https://img.shields.io/badge/JWT-Auth-orange?logo=jsonwebtokens" alt="JWT" height="28"/>
+  <img src="https://img.shields.io/badge/Docker-Container-blue?logo=docker&logoColor=white" alt="Docker" height="28"/>
+</p>
+
+### Frontend
+
+<p align="left">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React" height="28"/>
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=yellow" alt="Vite" height="28"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS" height="28"/>
+  <img src="https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter" alt="React Router" height="28"/>
+  <img src="https://img.shields.io/badge/Axios-HTTP-5A29E4?logo=axios&logoColor=white" alt="Axios" height="28"/>
+  <img src="https://img.shields.io/badge/Recharts-3-FF7300?logo=chartdotjs&logoColor=white" alt="Recharts" height="28"/>
+  <img src="https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer" alt="Framer Motion" height="28"/>
+  <img src="https://img.shields.io/badge/Lucide_React-Icons-black?logo=lucide&logoColor=white" alt="Lucide React" height="28"/>
+  <img src="https://img.shields.io/badge/EmojiPicker-4-FFDD67" alt="Emoji Picker" height="28"/>
+  <img src="https://img.shields.io/badge/Moment.js-Dates-eb6d4a?logo=momentjs&logoColor=white" alt="Moment.js" height="28"/>
+  <img src="https://img.shields.io/badge/Hot%20Toast-2-EA580C?logo=react&logoColor=white" alt="React Hot Toast" height="28"/>
+</p>
+
 
 ---
+
 
 ## Table of Contents
 
@@ -46,67 +82,6 @@
 - **Scheduled Reminders** — Automated daily email reminders to log expenses (10 PM IST) and daily expense summaries (11 PM IST)
 - **Multi-database support** — MySQL for local development, PostgreSQL for production
 
----
-
-## Tech Stack
-
-### Backend
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Java-21-yellow.svg?logo=java&logoColor=white" alt="Java" height="28"/>
-  <img src="https://img.shields.io/badge/Spring_Boot-3.5.5-brightgreen.svg?logo=springboot" alt="Spring Boot" height="28"/>
-  <img src="https://img.shields.io/badge/Spring_Security-6.x-green.svg?logo=springsecurity" alt="Spring Security" height="28"/>
-  <img src="https://img.shields.io/badge/JPA-ORM-blue.svg?logo=hibernate" alt="JPA" height="28"/>
-  <img src="https://img.shields.io/badge/Maven-Build-blueviolet?logo=apachemaven" alt="Maven" height="28"/>
-  <img src="https://img.shields.io/badge/MySQL-Dev-4479A1?logo=mysql&logoColor=white" alt="MySQL" height="28"/>
-  <img src="https://img.shields.io/badge/PostgreSQL-Prod-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL" height="28"/>
-  <img src="https://img.shields.io/badge/Lombok-Annotate-red?logo=lombok" alt="Lombok" height="28"/>
-  <img src="https://img.shields.io/badge/JWT-Auth-orange?logo=jsonwebtokens" alt="JWT" height="28"/>
-  <img src="https://img.shields.io/badge/Docker-Container-blue?logo=docker&logoColor=white" alt="Docker" height="28"/>
-</p>
-
-### Frontend
-
-<p align="left">
-  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React" height="28"/>
-  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=yellow" alt="Vite" height="28"/>
-  <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS" height="28"/>
-  <img src="https://img.shields.io/badge/React_Router-7-CA4245?logo=reactrouter" alt="React Router" height="28"/>
-  <img src="https://img.shields.io/badge/Axios-HTTP-5A29E4?logo=axios&logoColor=white" alt="Axios" height="28"/>
-  <img src="https://img.shields.io/badge/Recharts-3-FF7300?logo=chartdotjs&logoColor=white" alt="Recharts" height="28"/>
-  <img src="https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer" alt="Framer Motion" height="28"/>
-  <img src="https://img.shields.io/badge/Lucide_React-Icons-black?logo=lucide&logoColor=white" alt="Lucide React" height="28"/>
-  <img src="https://img.shields.io/badge/EmojiPicker-4-FFDD67" alt="Emoji Picker" height="28"/>
-  <img src="https://img.shields.io/badge/Moment.js-Dates-eb6d4a?logo=momentjs&logoColor=white" alt="Moment.js" height="28"/>
-  <img src="https://img.shields.io/badge/Hot%20Toast-2-EA580C?logo=react&logoColor=white" alt="React Hot Toast" height="28"/>
-</p>
-
-| Technology | Version | Purpose |
-|---|---|---|
-| Java | 21 | Language |
-| Spring Boot | 3.5.5 | Application framework |
-| Spring Web | — | REST API |
-| Spring Data JPA | — | Database ORM |
-| Spring Security | — | Authentication & authorization |
-| Spring Mail | — | Email via SMTP |
-| Spring Actuator | — | Health and metrics endpoints |
-| jjwt (io.jsonwebtoken) | 0.11.5 | JWT generation and validation |
-| MySQL Connector | — | MySQL driver (dev) |
-| PostgreSQL | — | PostgreSQL driver (prod) |
-| Apache POI | 5.4.0 | Excel/Office file support |
-| Lombok | — | Boilerplate reduction |
-| BCryptPasswordEncoder | — | Password hashing |
-| React | 19 | UI framework |
-| Vite | 7 | Build tool and dev server |
-| Tailwind CSS | 4 | Utility-first styling |
-| React Router DOM | 7 | Client-side routing |
-| Axios | — | HTTP requests to backend |
-| Recharts | 3 | Charts and data visualization |
-| Framer Motion | 12 | Animations |
-| Lucide React | — | Icon library |
-| emoji-picker-react | 4 | Emoji picker for categories |
-| Moment.js | — | Date formatting |
-| React Hot Toast | 2 | Toast notifications |
 
 ---
 
@@ -215,7 +190,32 @@ Spring Boot REST API (port 8080, context: /api/v1.0)
 5. `JwtRequestFilter` validates token and sets the Spring Security context
 
 ---
-
+| Technology | Version | Purpose |
+|---|---|---|
+| Java | 21 | Language |
+| Spring Boot | 3.5.5 | Application framework |
+| Spring Web | — | REST API |
+| Spring Data JPA | — | Database ORM |
+| Spring Security | — | Authentication & authorization |
+| Spring Mail | — | Email via SMTP |
+| Spring Actuator | — | Health and metrics endpoints |
+| jjwt (io.jsonwebtoken) | 0.11.5 | JWT generation and validation |
+| MySQL Connector | — | MySQL driver (dev) |
+| PostgreSQL | — | PostgreSQL driver (prod) |
+| Apache POI | 5.4.0 | Excel/Office file support |
+| Lombok | — | Boilerplate reduction |
+| BCryptPasswordEncoder | — | Password hashing |
+| React | 19 | UI framework |
+| Vite | 7 | Build tool and dev server |
+| Tailwind CSS | 4 | Utility-first styling |
+| React Router DOM | 7 | Client-side routing |
+| Axios | — | HTTP requests to backend |
+| Recharts | 3 | Charts and data visualization |
+| Framer Motion | 12 | Animations |
+| Lucide React | — | Icon library |
+| emoji-picker-react | 4 | Emoji picker for categories |
+| Moment.js | — | Date formatting |
+| React Hot Toast | 2 | Toast notifications |
 ## Prerequisites
 
 Before running MoneyMate locally, ensure you have:
