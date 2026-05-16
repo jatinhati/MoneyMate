@@ -2,6 +2,8 @@
 
 **MoneyMate** is a full-stack personal finance management web application that helps you track your income, expenses, and spending habits — all in one place. It features a Spring Boot REST API backend and a modern React frontend.
 ---
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/11349842-2f8b-4ba3-ab45-3a07dd952b1d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1a37d2c6-8cb0-427d-9c95-43d0f3dbcbb9" />
 
 ## Tech Stack
 
